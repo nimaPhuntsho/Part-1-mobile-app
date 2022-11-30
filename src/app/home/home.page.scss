@@ -1,27 +1,23 @@
-#container {
-  text-align: center;
+.container {
+  height: 98%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(9, 41, 70);
+}
 
+.btn {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 0;
+  width: 100%;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.title {
+  color: rgb(165, 188, 156);
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+li {
+  color: aliceblue;
+  text-align: center;
 }

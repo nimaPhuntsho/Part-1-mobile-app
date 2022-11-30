@@ -1,0 +1,156 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-menu-button slot="start" menu="main-menu"></ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card class="container">
+    <ion-card-header>
+      <ion-card-title>Registration From</ion-card-title>
+      <ion-card-subtitle>Motorcazz</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="form-container">
+        <form #userInput="ngForm">
+          <ion-list
+            ><ion-item>
+              <ion-label position="floating">Registration number</ion-label>
+              <ion-input
+                name="rego"
+                placeholder="Enter rego"
+                [(ngModel)]="rego"
+                #registration="ngModel"
+                pattern="^\d{3}[a-zA-Z]{3}$"
+              ></ion-input>
+              <p
+                class="error"
+                *ngIf="registration.invalid && registration.touched"
+              >
+                Rego format eg. 123ABC
+              </p>
+            </ion-item></ion-list
+          >
+          <ion-list
+            ><ion-item>
+              <ion-label position="floating">Make</ion-label>
+              <ion-input
+                name="make"
+                [(ngModel)]="make"
+                #brand="ngModel"
+                pattern="^[a-zA-Z]+$"
+              >
+              </ion-input>
+              <p class="error" *ngIf="brand.invalid && brand.touched">
+                Only alpha characters
+              </p>
+            </ion-item>
+          </ion-list>
+          <ion-list
+            ><ion-item>
+              <ion-label position="floating">Model</ion-label>
+              <ion-input
+                name="model"
+                [(ngModel)]="model"
+                required=""
+              ></ion-input> </ion-item
+          ></ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Year</ion-label>
+              <ion-input name="year" [(ngModel)]="year"></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-select
+                name="transmission"
+                placeholder="Transmission"
+                [(ngModel)]="transmission"
+                interface="action-sheet"
+                required=""
+              >
+                <ion-select-option value="Manual">Manual</ion-select-option>
+                <ion-select-option value="Automatic"
+                  >Automatic</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-select
+                name="body-type"
+                placeholder="Body Type"
+                [(ngModel)]="bodyType"
+                interface="popover"
+                required=""
+              >
+                <ion-select-option value="SUV">SUV</ion-select-option>
+                <ion-select-option value="Hatch">Hatch </ion-select-option>
+                <ion-select-option value="Sedan">Sedan</ion-select-option>
+                <ion-select-option value="Van">Van</ion-select-option>
+                <ion-select-option value="Ute">Ute</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Rental Price</ion-label>
+              <ion-input
+                name="rentalPrice"
+                required=""
+                [(ngModel)]="price"
+                #cost="ngModel"
+                pattern="^\d+$"
+              ></ion-input>
+              <p class="error" *ngIf="cost.invalid && cost.touched">
+                Only numeric characters
+              </p>
+            </ion-item>
+          </ion-list>
+
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Odometer</ion-label>
+              <ion-input
+                name="odo"
+                required=""
+                [(ngModel)]="odometer"
+                #odo="ngModel"
+                pattern="^\d+$"
+              ></ion-input>
+              <p class="error" *ngIf="odo.invalid && odo.touched">
+                Only numeric characters
+              </p>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-select
+              name="rental-status"
+              placeholder="Rental Status"
+              [(ngModel)]="rentalStatus"
+              interface="popover"
+              required=""
+            >
+              <ion-select-option value="Available">Available</ion-select-option>
+              <ion-select-option value="Not Available"
+                >Not available
+              </ion-select-option>
+            </ion-select>
+          </ion-list>
+
+          <ion-button
+            expand="full"
+            (click)="submit(userInput)"
+            [disabled]="userInput.form.invalid"
+            >Submit
+          </ion-button>
+          <ion-label *ngIf="submitMessage">Car registered</ion-label>
+        </form>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
