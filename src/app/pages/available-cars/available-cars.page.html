@@ -5,12 +5,14 @@
 </ion-header>
 <ion-content>
   <ion-content class="card-container">
-    <div class="header">
-      <h1>Available Cars</h1>
-      <p class="error" *ngIf="emptyList">No available cars, add cars first</p>
+    <h1>Available Cars</h1>
+    <div>
+      <p class="error header" *ngIf="emptyList">
+        No available cars, check again laters
+      </p>
     </div>
 
-    <ion-card color="dark" class="card" *ngFor="let car of carsAvailable ">
+    <ion-card color="primary" class="card" *ngFor="let car of carsAvailable ">
       <ion-card-header>
         <ion-card-title> {{ car.make + ' ' + car.model}} </ion-card-title>
         <ion-card-subtitle> {{ car.year}} </ion-card-subtitle>

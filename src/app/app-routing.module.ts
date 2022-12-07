@@ -37,6 +37,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'list-cars/:rego',
+    loadChildren: () =>
+      import('./pages/edit-update/edit-update.module').then(
+        (m) => m.EditUpdatePageModule
+      ),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/error/error.module').then((m) => m.ErrorPageModule),

@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit</ion-title>
+    <ion-buttons slot="start">
+      <ion-icon
+        (click)="goBack()"
+        class="back"
+        name="arrow-back-outline"
+      ></ion-icon
+    ></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <div class="form-container">
+        <form #userInput="ngForm">
+          <ion-list
+            ><ion-item>
+              <ion-label position="floating">Registration number</ion-label>
+              <ion-input
+                name="rego"
+                placeholder="Enter rego"
+                pattern="^\d{3}[a-zA-Z]{3}$"
+                [(ngModel)]="car.rego"
+              ></ion-input>
+              <!-- <p class="error">Rego format eg. 123ABC</p> -->
+            </ion-item></ion-list
+          >
+          <ion-list
+            ><ion-item>
+              <ion-label position="floating">Make</ion-label>
+              <ion-input
+                name="make"
+                pattern="^[a-zA-Z]+$"
+                [(ngModel)]="car.make"
+              >
+              </ion-input>
+              <!-- <p class="error">Only alpha characters</p> -->
+            </ion-item>
+          </ion-list>
+          <ion-list
+            ><ion-item>
+              <ion-label position="floating">Model</ion-label>
+              <ion-input
+                name="model"
+                required=""
+                [(ngModel)]="car.model"
+              ></ion-input> </ion-item
+          ></ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Year</ion-label>
+              <ion-input name="year" [(ngModel)]="car.year"></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-select
+                name="transmission"
+                placeholder="Transmission"
+                interface="action-sheet"
+                required=""
+                [(ngModel)]="car.transmission"
+              >
+                <ion-select-option value="Manual">Manual</ion-select-option>
+                <ion-select-option value="Automatic"
+                  >Automatic</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-select
+                name="body-type"
+                placeholder="Body Type"
+                interface="popover"
+                required=""
+                [(ngModel)]="car.bodyType"
+              >
+                <ion-select-option value="SUV">SUV</ion-select-option>
+                <ion-select-option value="Hatch">Hatch </ion-select-option>
+                <ion-select-option value="Sedan">Sedan</ion-select-option>
+                <ion-select-option value="Van">Van</ion-select-option>
+                <ion-select-option value="Ute">Ute</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Rental Price</ion-label>
+              <ion-input
+                name="rentalPrice"
+                required=""
+                pattern="^\d+$"
+                [(ngModel)]="car.rentalPrice"
+              ></ion-input>
+              <!-- <p class="error">Only numeric characters</p> -->
+            </ion-item>
+          </ion-list>
+
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Odometer</ion-label>
+              <ion-input
+                name="odo"
+                required=""
+                pattern="^\d+$"
+                [(ngModel)]="car.odometer"
+              ></ion-input>
+              <!-- <p class="error">Only numeric characters</p> -->
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-select
+              name="rental-status"
+              placeholder="Rental Status"
+              interface="popover"
+              required=""
+              [(ngModel)]="car.rentalStatus"
+            >
+              <ion-select-option value="Available">Available</ion-select-option>
+              <ion-select-option value="Not Available"
+                >Not available
+              </ion-select-option>
+            </ion-select>
+          </ion-list>
+
+          <ion-button expand="full" (click)="update()">Update</ion-button>
+          <ion-label>Car registered</ion-label>
+        </form>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

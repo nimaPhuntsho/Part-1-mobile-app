@@ -5,9 +5,10 @@
 </ion-header>
 <ion-searchbar [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
 <ion-content class="card-container">
-  <div class="header">
-    <h1>All Cars</h1>
-    <p class="error" *ngIf="emptyList">
+  <h1>All Cars</h1>
+
+  <div>
+    <p class="error header" *ngIf="emptyList">
       No cars to display, please register the car first
     </p>
   </div>
@@ -17,9 +18,11 @@
     *ngFor="let car of allCars | filter:filterTerm; let i = index"
   >
     <ion-card-header>
-      <ion-card-title> {{ car.make + ' ' + car.model}} </ion-card-title>
+      <ion-card-title>
+        {{ car.make + ' ' + car.model | titlecase}}
+      </ion-card-title>
       <ion-card-subtitle> {{ car.year}} </ion-card-subtitle>
-      <ion-card-subtitle> {{car.rentalStatus}} </ion-card-subtitle>
+      <ion-card-subtitle> {{car.rentalStatus | titlecase}} </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
@@ -31,27 +34,29 @@
       </ion-list>
       <ion-list>
         <ion-item>
-          <ion-label>Transmission: {{ car.transmission }} </ion-label>
+          <ion-label
+            >Transmission: {{ car.transmission | titlecase}}
+          </ion-label>
         </ion-item>
       </ion-list>
       <ion-list>
-        <ion-item>
+        <ion-item lines="">
           <ion-label>Odometer: {{ car.odometer }} </ion-label>
         </ion-item>
       </ion-list>
       <ion-list>
-        <ion-item>
+        <ion-item lines="">
           <ion-label>Registration: {{ car.rego }} </ion-label>
         </ion-item>
       </ion-list>
       <ion-list>
-        <ion-item>
-          <ion-label>Body Type: {{ car.bodyType }} </ion-label>
+        <ion-item detail="">
+          <ion-label>Body Type: {{ car.bodyType | titlecase }} </ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
 
-    <ion-button fill="clear">Edit</ion-button>
+    <ion-button let i="index" fill="clear" (click)="edit(i)">Edit</ion-button>
     <ion-button fill="clear" (click)="presentAlert(i)">Delete</ion-button>
   </ion-card>
 </ion-content>
