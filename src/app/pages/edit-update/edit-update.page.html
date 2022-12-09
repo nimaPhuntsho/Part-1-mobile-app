@@ -1,17 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit</ion-title>
-    <ion-buttons slot="start">
+    <ion-menu-button slot="start" menu="main-menu"></ion-menu-button>
+    <ion-buttons slot="end">
       <ion-icon
-        (click)="goBack()"
-        class="back"
-        name="arrow-back-outline"
+        (click)="showHelp()"
+        class="help-icon"
+        name="information-circle-outline"
       ></ion-icon
     ></ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
+  <div class="help">
+    <div class="help-message" *ngIf="help">
+      <p>
+        The page will allow users to edit the car information and update it in
+        the database.
+      </p>
+    </div>
+  </div>
   <ion-card>
+    <ion-card-header>
+      <ion-card-title>Edit</ion-card-title>
+    </ion-card-header>
     <ion-card-content>
       <div class="form-container">
         <form #userInput="ngForm">
@@ -128,8 +140,10 @@
             </ion-select>
           </ion-list>
 
-          <ion-button expand="full" (click)="update()">Update</ion-button>
-          <ion-label>Car registered</ion-label>
+          <ion-button expand="full" (click)="update(userInput)"
+            >Update</ion-button
+          >
+          <ion-label *ngIf="updateMessage">Car details updated</ion-label>
         </form>
       </div>
     </ion-card-content>

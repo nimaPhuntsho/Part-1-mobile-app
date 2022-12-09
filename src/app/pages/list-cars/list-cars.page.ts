@@ -1,4 +1,4 @@
-import { NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
 import { VehicleServiceService } from './../../vehicle-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Vehicle } from 'src/app/vehicle';
@@ -10,30 +10,40 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./list-cars.page.scss'],
 })
 export class ListCarsPage implements OnInit {
+  allCars: Vehicle[] = [];
+  filterTerm: string = '';
+  carsAvailable: Vehicle[] = [];
+  emptyList: boolean = false;
+  editCar: Vehicle = {} as Vehicle;
+  updatedCar: Vehicle = {} as Vehicle; //store the edited car object passed from the edit page
+  handlerMessage: string = '';
+  unique: Vehicle[] = [];
+  help: boolean = false;
+
   constructor(
     private data: VehicleServiceService,
     private alertController: AlertController,
     private router: Router
   ) {}
-  allCars: Vehicle[] = [];
-  name: string[] = ['nima', 'funso'];
-  filterTerm: string = '';
-  carsAvailable: Vehicle[] = [];
-  emptyList: boolean = false;
-  editCar: Vehicle = {} as Vehicle;
-  updatedCar: Vehicle = {} as Vehicle;
-  handlerMessage: string = '';
 
   ngOnInit() {
-    this.data.currentObject.subscribe((res) => (this.allCars = res));
     this.data.currentUpdate.subscribe((res) => (this.updatedCar = res));
-
+    this.data.currentObject.subscribe((res) => (this.allCars = res));
     this.availableCars(this.allCars);
-    this.allCars.push(this.updatedCar);
-    console.log(this.updatedCar);
+  }
+
+  ionViewWillEnter() {
+    if (Object.keys(this.updatedCar).length !== 0) {
+      this.allCars.push(this.updatedCar);
+    }
+    const filterCar = this.allCars.filter((element) => {
+      const isDuplicate = this.unique.includes(element);
+      if (!isDuplicate) {
+        this.unique.push(element);
+      }
+    });
 
     if (this.allCars.length === 0) this.emptyList = true;
-    console.log(this.allCars.length);
   }
 
   availableCars(cars: Vehicle[]) {
@@ -56,8 +66,7 @@ export class ListCarsPage implements OnInit {
         editCarDetails: JSON.stringify(this.editCar),
       },
     };
-
-    this.router.navigate(['list-cars/:id'], navigationExtras);
+    this.router.navigate(['edit-update'], navigationExtras);
   }
 
   async presentAlert(index: number) {
@@ -82,9 +91,18 @@ export class ListCarsPage implements OnInit {
         },
       ],
     });
-
     await alert.present();
-
     const { role } = await alert.onDidDismiss();
+  }
+
+  displayCars() {
+    this.data.currentUpdate.subscribe((res) => (this.updatedCar = res));
+    if (Object.keys(this.updatedCar).length !== 0) {
+      this.allCars.push(this.updatedCar);
+    }
+  }
+
+  showHelp() {
+    this.help = true;
   }
 }

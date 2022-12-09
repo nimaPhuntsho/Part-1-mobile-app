@@ -1,12 +1,27 @@
 <ion-header>
   <ion-toolbar>
     <ion-menu-button slot="start" menu="main-menu"></ion-menu-button>
+    <ion-buttons slot="end">
+      <ion-icon
+        (click)="showHelp()"
+        class="help-icon"
+        name="information-circle-outline"
+      ></ion-icon
+    ></ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-searchbar [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
-<ion-content class="card-container">
-  <h1>All Cars</h1>
 
+<ion-content class="card-container">
+  <div class="help">
+    <div class="help-message" *ngIf="help">
+      <p>
+        This section of the app displays all the registered vehicles. The page
+        provides abilities to edit and delete the car informations
+      </p>
+    </div>
+  </div>
+  <h1>All Cars</h1>
   <div>
     <p class="error header" *ngIf="emptyList">
       No cars to display, please register the car first
@@ -15,7 +30,7 @@
   <ion-card
     color="dark"
     class="card"
-    *ngFor="let car of allCars | filter:filterTerm; let i = index"
+    *ngFor="let car of unique | filter:filterTerm; let i = index"
   >
     <ion-card-header>
       <ion-card-title>
@@ -27,9 +42,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item>
-          <ion-label
-            >Price: {{car.rentalPrice | currency: 'AUD' }} per day</ion-label
-          >
+          <ion-label>Price: {{car.rentalPrice | currency }} per day</ion-label>
         </ion-item>
       </ion-list>
       <ion-list>
@@ -50,13 +63,13 @@
         </ion-item>
       </ion-list>
       <ion-list>
-        <ion-item detail="">
+        <ion-item>
           <ion-label>Body Type: {{ car.bodyType | titlecase }} </ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
 
-    <ion-button let i="index" fill="clear" (click)="edit(i)">Edit</ion-button>
+    <ion-button fill="clear" (click)="edit(i)">Edit</ion-button>
     <ion-button fill="clear" (click)="presentAlert(i)">Delete</ion-button>
   </ion-card>
 </ion-content>

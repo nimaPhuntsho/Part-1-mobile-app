@@ -1,10 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-menu-button slot="start" menu="main-menu"></ion-menu-button>
+    <ion-buttons slot="end">
+      <ion-icon
+        (click)="showHelp()"
+        class="help-icon"
+        name="information-circle-outline"
+      ></ion-icon
+    ></ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="help">
+    <div class="help-message" *ngIf="help">
+      <p>All the form fields must be completed with valid informations.</p>
+    </div>
+  </div>
   <ion-card class="container">
     <ion-card-header>
       <ion-card-title>Registration From</ion-card-title>

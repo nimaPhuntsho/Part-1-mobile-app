@@ -32,3 +32,19 @@ li {
 .error {
   color: red;
 }
+
+.help-icon {
+  font-size: 33px;
+  color: rgb(17, 61, 84);
+  margin-right: 10px;
+}
+
+.help-message {
+  border: 1px solid blue;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.help-message p {
+  padding: 10px;
+}

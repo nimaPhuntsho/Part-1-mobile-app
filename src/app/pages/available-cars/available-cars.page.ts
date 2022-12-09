@@ -13,9 +13,13 @@ export class AvailableCarsPage implements OnInit {
   allCars: Vehicle[] = [];
   carsAvailable: Vehicle[] = [];
   emptyList: boolean = false;
+  help: boolean = false;
 
   ngOnInit() {
     this.data.currentObject.subscribe((res) => (this.allCars = res));
+  }
+
+  ionViewWillEnter() {
     this.availableCars(this.allCars);
 
     if (this.carsAvailable.length === 0) this.emptyList = true;
@@ -27,5 +31,9 @@ export class AvailableCarsPage implements OnInit {
         this.carsAvailable.push(element);
       }
     }
+  }
+
+  showHelp() {
+    this.help = true;
   }
 }

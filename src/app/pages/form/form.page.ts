@@ -27,6 +27,7 @@ export class FormPage implements OnInit {
   price: string = '';
   rentalStatus: string = '';
   submitMessage: boolean = false;
+  help: boolean = false;
 
   allCars: Vehicle[] = [];
 
@@ -52,5 +53,9 @@ export class FormPage implements OnInit {
 
   newCars(cars: Vehicle[]) {
     this.data.changeObject(cars);
+  }
+
+  showHelp() {
+    this.help = true;
   }
 }
