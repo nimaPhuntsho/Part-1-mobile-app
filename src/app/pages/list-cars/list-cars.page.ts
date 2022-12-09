@@ -36,12 +36,6 @@ export class ListCarsPage implements OnInit {
     if (Object.keys(this.updatedCar).length !== 0) {
       this.allCars.push(this.updatedCar);
     }
-    const filterCar = this.allCars.filter((element) => {
-      const isDuplicate = this.unique.includes(element);
-      if (!isDuplicate) {
-        this.unique.push(element);
-      }
-    });
 
     if (this.allCars.length === 0) this.emptyList = true;
   }
